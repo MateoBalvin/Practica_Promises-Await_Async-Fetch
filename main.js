@@ -40,7 +40,7 @@ function getDatos2(){
 
 /*EJEMPLO #2 = ASINCRONIA CON PROMESAS*/ console.log("EJEMPLO #2 = ASINCRONIA CON PROMESAS")
 
-// --PROMISE-- 
+/*--PROMISE-- */  console.log("-- PROMISES --")
 /* Se usa cuando el codigo este listo lo pueda resolver o si ocurre un error lo puede rechazar. Una promesa (Promise) es un objeto que representa el resultado de una operación asíncrona (por ejemplo, cargar datos de internet). Esa operación puede terminar en:
 
 ✅ Resuelta (Resolve) → se obtuvo el resultado.
@@ -67,13 +67,32 @@ getDatos3()
 .then((correcto)=>console.log(correcto))
 .catch((error)=> console.log(error.message));
 
+/*EJEMPLO #3 CON ASYNC Y AWAIT QUE ES ASINCRONA*/ /*
 
-//EJEMPLO
-const edad = 20;
+En vez de usar el .then y el .catch se usa estas variables
+
+.await: Se pone dentro de una funcion await - Se coloca porque es asincrona
+async: Se pone con una funcion
+*/
+
+async function Prueba_async_await() {
+    const peliculas = await getDatos3();
+    console.log(peliculas);
+}
+Prueba_async_await()
+
+/*EJEMPLO PRACTICA*/ console.log("Ejemplo Practica")  
+const edad = 22;
 promesa= new Promise((resolve,reject)=>{
 
     if(edad<21){
         reject(new Error("No esa edad es inferior"))
+    }
+    else if(edad>21){
+        setTimeout(()=>{
+            reject(new Error("No esa edad es superior"))
+        },2000)
+        
     }
     else{
         setTimeout(()=>{
@@ -87,3 +106,23 @@ promesa
 .catch((error) => console.log(error.message))
 
 
+/*-- FETCH --*/ console.log("-- FETCH --"); /*
+fetch() es una peticion, función de JavaScript que permite hacer peticiones HTTP (como GET, POST, etc.) a servidores o APIs externas.
+Por ejemplo, puedes pedir una lista de películas, usuarios o productos desde un servidor.
+
+*/
+// fetch("https://pokeapi.co/api/v2/pokemon/ditto")
+fetch("https://jsonplaceholder.typicode.com/users")
+.then((respo1)=>respo1.json())
+.then((data1)=> {
+    console.log(data1);
+})
+.catch((error)=>console.log("Ocurrio un error",error.message));
+
+//FORMA #2 CON ASYNC Y AWAIT
+
+async function Prueba_Fetch() {
+    const respo1 = await fetch("https://jsonplaceholder.typicode.com/users")
+    const data1 = respo1.json();
+    console.log(data1);
+}
